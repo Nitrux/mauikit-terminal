@@ -26,6 +26,7 @@ BUILD_DEPS='
     libkf6i18n-dev
     libkf6iconthemes-dev
     libkf6kio-dev
+    libkf6pty-dev
     lintian
     qt6-base-dev
     qt6-base-private-dev
