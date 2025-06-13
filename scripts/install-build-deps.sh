@@ -40,7 +40,7 @@ fi
 # -- Install build packages.
 
 $APT_COMMAND update -q
-$APT_COMMAND install -y - --no-install-recommends $BUILD_DEPS
+$APT_COMMAND install -y - --no-install-recommends \
     appstream \
     automake \
     autotools-dev \
