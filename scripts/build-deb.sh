@@ -37,6 +37,15 @@ rm -rf mauikit-terminal/{examples,LICENSE,README.md}
 
 # -- Compile Source
 
+FILE="CMakeLists.txt"
+
+# 1. Ensure Qml is in the find_package line
+sed -i '/find_package(Qt.*REQUIRED COMPONENTS/ s/Core/& Qml/' "$FILE"
+
+# 2. Replace qt_policy line with guarded block
+sed -i '/qt_policy(SET QTP0004 NEW)/c\
+if(QT_VERSION VERSION_GREATER_EQUAL "6.8.0")\n  qt_policy(SET QTP0004 NEW)\nendif()' "$FILE"
+
 mkdir -p build && cd build
 
 HOST_MULTIARCH=$(dpkg-architecture -qDEB_HOST_MULTIARCH)
