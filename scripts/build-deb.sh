@@ -34,17 +34,25 @@ git clone --depth 1 --branch "$MAUIKIT_TERMINAL_BRANCH" https://invent.kde.org/m
 
 rm -rf mauikit-terminal/{examples,LICENSE,README.md}
 
+cd mauikit-terminal
+
+if [ ! -f CMakeLists.txt ]; then
+  echo "CMakeLists.txt not found"; exit 1
+fi
+
+if ! grep -Eq 'find_package\(Qt.*REQUIRED COMPONENTS.*Qml' CMakeLists.txt; then
+  sed -i '/find_package(Qt.*REQUIRED COMPONENTS/ s/Core/& Qml/' CMakeLists.txt
+fi
+
+if grep -qE '^[[:space:]]*qt_policy\(SET QTP0004 NEW\)' CMakeLists.txt; then
+  sed -i '/^[[:space:]]*qt_policy(SET QTP0004 NEW)/c\
+if(QT_VERSION VERSION_GREATER_EQUAL "6.8.0")\
+  qt_policy(SET QTP0004 NEW)\
+endif()' CMakeLists.txt
+fi
+
 
 # -- Compile Source
-
-FILE="CMakeLists.txt"
-
-# 1. Ensure Qml is in the find_package line
-sed -i '/find_package(Qt.*REQUIRED COMPONENTS/ s/Core/& Qml/' "$FILE"
-
-# 2. Replace qt_policy line with guarded block
-sed -i '/qt_policy(SET QTP0004 NEW)/c\
-if(QT_VERSION VERSION_GREATER_EQUAL "6.8.0")\n  qt_policy(SET QTP0004 NEW)\nendif()' "$FILE"
 
 mkdir -p build && cd build
 
