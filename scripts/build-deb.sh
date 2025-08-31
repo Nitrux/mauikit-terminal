@@ -34,21 +34,15 @@ git clone --depth 1 --branch "$MAUIKIT_TERMINAL_BRANCH" https://invent.kde.org/m
 
 rm -rf mauikit-terminal/{examples,LICENSE,README.md}
 
-cd mauikit-terminal
-
-if [ ! -f CMakeLists.txt ]; then
-  echo "CMakeLists.txt not found"; exit 1
+if ! grep -Eq 'find_package\(Qt.*REQUIRED COMPONENTS.*Qml' mauikit-terminal/CMakeLists.txt; then
+  sed -i '/find_package(Qt.*REQUIRED COMPONENTS/ s/Core/& Qml/' mauikit-terminal/CMakeLists.txt
 fi
 
-if ! grep -Eq 'find_package\(Qt.*REQUIRED COMPONENTS.*Qml' CMakeLists.txt; then
-  sed -i '/find_package(Qt.*REQUIRED COMPONENTS/ s/Core/& Qml/' CMakeLists.txt
-fi
-
-if grep -qE '^[[:space:]]*qt_policy\(SET QTP0004 NEW\)' CMakeLists.txt; then
+if grep -qE '^[[:space:]]*qt_policy\(SET QTP0004 NEW\)' mauikit-terminal/CMakeLists.txt; then
   sed -i '/^[[:space:]]*qt_policy(SET QTP0004 NEW)/c\
 if(QT_VERSION VERSION_GREATER_EQUAL "6.8.0")\
   qt_policy(SET QTP0004 NEW)\
-endif()' CMakeLists.txt
+endif()' mauikit-terminal/CMakeLists.txt
 fi
 
 
@@ -76,7 +70,8 @@ make -j"$(nproc)"
 
 make install
 
-### Run checkinstall and Build Debian Package
+
+# -- Run checkinstall and Build Debian Package
 
 >> description-pak printf "%s\n" \
 	'A free and modular front-end framework for developing user experiences.' \
