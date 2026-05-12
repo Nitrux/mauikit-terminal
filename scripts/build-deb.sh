@@ -11,7 +11,7 @@ set -e
 
 # -- Download Source
 
-git clone --depth 1 --branch "$MAUIKIT_TERMINAL_BRANCH" https://invent.kde.org/maui/mauikit-terminal.git
+git clone --depth 1 --branch "$MAUIKIT_TERMINAL_BRANCH" https://github.com/Nitrux/mauikit-terminal-src.git
 
 rm -rf mauikit-terminal/{examples,LICENSE,README.md}
 
