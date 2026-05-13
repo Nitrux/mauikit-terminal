@@ -34,7 +34,7 @@ cmake \
 	-DCMAKE_INSTALL_RUNSTATEDIR=/run "-GUnix Makefiles" \
 	-DCMAKE_VERBOSE_MAKEFILE=ON \
 	-DCMAKE_INSTALL_LIBDIR="/usr/lib/${HOST_MULTIARCH}" \
-	../mauikit-terminal/
+	../mauikit-terminal-src/
 
 make -j"$(nproc)"
 
@@ -65,7 +65,7 @@ checkinstall -D -y \
 	--pkgrelease="1" \
 	--pkglicense=LGPL-3 \
 	--pkggroup=libs \
-	--pkgsource=mauikit-terminal \
+	--pkgsource=mauikit-terminal-src \
 	--pakdir=. \
 	--maintainer=uri_herrera@nxos.org \
 	--provides=mauikit-terminal \
