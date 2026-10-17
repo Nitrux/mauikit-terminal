@@ -6,7 +6,7 @@
 
 # -- Exit on errors.
 
-set -e
+set -euo pipefail
 
 
 # -- Check if running as root.
@@ -34,8 +34,8 @@ $APT_COMMAND install -y --no-install-recommends \
     libxcb-icccm4-dev \
     libkf6windowsystem-dev \
     libkf6notifications-dev \
-    meson \
-    ninja-build \
+    cmake \
+    extra-cmake-modules \
     pkg-config \
     curl \
     devscripts \
