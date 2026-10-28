@@ -59,7 +59,7 @@ Priority: optional
 Architecture: ${TARGET_ARCH}
 Maintainer: uri_herrera@nxos.org
 Provides: mauikit-terminal
-Depends: libqt6widgets6,libc6,libkf6coreaddons6,libkf6i18n6,libkf6iconthemes6,libkf6pty6,libqt6core5compat6,libqt6core6t64,libqt6gui6,libqt6qml6,libqt6quick6,libqt6quickcontrols2-6,libqt6quickshapes6,mauikit (>= 4.0.4),qml6-module-org-kde-kirigami,qml6-module-qtquick-controls,qml6-module-qtquick-shapes
+Depends: libqt6widgets6,libc6,libkf6coreaddons6,libkf6i18n6,libkf6iconthemes6,libkf6pty6,libqt6core5compat6,libqt6core6t64,libqt6gui6,libqt6qml6,libqt6quick6,libqt6quickcontrols2-6,libqt6quickshapes6,mauikit (>= 4.0.5),qml6-module-org-kde-kirigami,qml6-module-qtquick-controls,qml6-module-qtquick-shapes
 Description: mauikit-terminal
  mauikit-terminal
 CONTROL
